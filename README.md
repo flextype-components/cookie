@@ -1,0 +1,2 @@
+# Cookie
+The cookie class
