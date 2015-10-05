@@ -68,7 +68,9 @@ class Cookie
         $key = (string) $key;
 
         // Cookie doesn't exist
-        if( ! isset($_COOKIE[$key])) return false;
+        if (! isset($_COOKIE[$key])) {
+            return false;
+        }
 
         // Fetch base value
         $value = (get_magic_quotes_gpc()) ? stripslashes($_COOKIE[$key]) : $_COOKIE[$key];
@@ -77,11 +79,12 @@ class Cookie
         $actual_value = @unserialize($value);
 
         // If unserialize failed
-        if($actual_value === false && serialize(false) != $value) return false;
+        if ($actual_value === false && serialize(false) != $value) {
+            return false;
+        }
 
         // Everything is fine
         return $actual_value;
-
     }
 
 
@@ -98,5 +101,4 @@ class Cookie
     {
         unset($_COOKIE[$key]);
     }
-
 }
