@@ -1,52 +1,39 @@
 <?php
 
- /**
-  * This file is part of the Force Components.
-  *
-  * (c) Romanenko Sergey / Awilum <awilum@msn.com>
-  *
-  * For the full copyright and license information, please view the LICENSE
-  * file that was distributed with this source code.
-  */
+/**
+ * @package Flextype Components
+ *
+ * @author Sergey Romanenko <awilum@yandex.ru>
+ * @link http://components.flextype.org
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Flextype\Component\Cookie;
 
 class Cookie
 {
-    /**
-     * Protected constructor since this is a static class.
-     *
-     * @access  protected
-     */
-    protected function __construct()
-    {
-        // Nothing here
-    }
 
     /**
-     * Send a cookie
+     * Set a cookie
      *
-     *  <code>
-     *      Cookie::set('limit', 10);
-     *  </code>
+     * Cookie::set('username', 'Awilum');
      *
      * @param  string  $key      A name for the cookie.
      * @param  mixed   $value    The value to be stored. Keep in mind that they will be serialized.
-     * @param  integer $expire   The number of seconds that this cookie will be available.
+     * @param  int     $expire   The number of seconds that this cookie will be available.
      * @param  string  $path     The path on the server in which the cookie will be availabe. Use / for the entire domain, /foo if you just want it to be available in /foo.
      * @param  string  $domain   The domain that the cookie is available on. Use .example.com to make it available on all subdomains of example.com.
-     * @param  boolean $secure   Should the cookie be transmitted over a HTTPS-connection? If true, make sure you use a secure connection, otherwise the cookie won't be set.
-     * @param  boolean $httpOnly Should the cookie only be available through HTTP-protocol? If true, the cookie can't be accessed by Javascript, ...
-     * @return boolean
+     * @param  bool $secure   Should the cookie be transmitted over a HTTPS-connection? If true, make sure you use a secure connection, otherwise the cookie won't be set.
+     * @param  bool $httpOnly Should the cookie only be available through HTTP-protocol? If true, the cookie can't be accessed by Javascript, ...
+     * @return bool
      */
-    public static function set($key, $value, $expire = 86400, $domain = '', $path = '/', $secure = false, $httpOnly = false)
+    public static function set(string $key, $value, int $expire = 86400, string $domain = '', string $path = '/', bool $secure = false, bool $httpOnly = false) : bool
     {
         // Redefine vars
-        $key      = (string) $key;
         $value    = serialize($value);
-        $expire   = time() + (int) $expire;
-        $path     = (string) $path;
-        $domain   = (string) $domain;
-        $secure   = (bool) $secure;
-        $httpOnly = (bool) $httpOnly;
+        $expire   = time() + $expire;
 
         // Set cookie
         return setcookie($key, $value, $expire, $path, $domain, $secure, $httpOnly);
@@ -55,14 +42,12 @@ class Cookie
     /**
      * Get a cookie
      *
-     *  <code>
-     *      $limit = Cookie::get('limit');
-     *  </code>
+     * $username = Cookie::get('username');
      *
      * @param  string $key The name of the cookie that should be retrieved.
      * @return mixed
      */
-    public static function get($key)
+    public static function get(string $key)
     {
         // Redefine key
         $key = (string) $key;
@@ -91,13 +76,11 @@ class Cookie
     /**
      * Delete a cookie
      *
-     *  <code>
-     *    	Cookie::delete('limit');
-     *  </code>
+     * Cookie::delete('username');
      *
      * @param string $name The name of the cookie that should be deleted.
      */
-    public static function delete($key)
+    public static function delete(string $key) : void
     {
         unset($_COOKIE[$key]);
     }

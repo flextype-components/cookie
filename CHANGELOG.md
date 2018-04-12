@@ -1,3 +1,6 @@
+# v1.1.0, 2018-04-12
+* PHP7 Support added
+
 # v1.0.1, 2015-10-17
 * MIT LICENSE instead of GNU GPL v3
 
