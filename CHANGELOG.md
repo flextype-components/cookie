@@ -1,3 +1,6 @@
+# v1.2.0, 2018-11-22
+* rewrited
+
 # v1.1.0, 2018-04-12
 * PHP7 Support added
 
